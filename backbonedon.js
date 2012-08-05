@@ -147,14 +147,22 @@
                                  && !context)
 
                               // callback defined and context is defined
-                              // ie remove specified event for specified context
+                              // ie remove specified callback for specified context
                               || ( callback && list[i] === callback
                                    && context && list[i+1] === context)
 
                               // callback NOT defined and context is defined
-                              // ie removed all callback for specific context
+                              // ie removed all callbacks for specific context
                               || ( !callback && list[i] !== callback
                                    && context && list[i+1] === context )
+
+
+                              // callback NOT defined and context NOT defined
+                              // i.e. removed everything, this is unreachable code
+                              // as it is caught by
+                              // https://github.com/documentcloud/backbone/blob/master/backbone.js#L112
+                              // and https://github.com/documentcloud/backbone/blob/master/backbone.js#L103
+                              || ( !callback && !context )
 
                               ) {
 
